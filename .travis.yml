@@ -14,6 +14,7 @@ before_install:
   - sudo umount -f /cvmfs/sft.cern.ch
   - sudo mkdir -p /cvmfs/sft.cern.ch
   - sudo mount -t cvmfs sft.cern.ch /cvmfs/sft.cern.ch
+  - echo "Mounting completed"
   - ls /cvmfs/sft.cern.ch
 
 script:

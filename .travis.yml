@@ -26,22 +26,22 @@ script:
 
 env:
   matrix:
-    - OS=cc7; LCG=94
-    - OS=slc6; LCG=95
-    - OS=slc6; LCG=95
-    - OS=slc6; LCG=95
+    - OS=cc7 LCG=94
+    - OS=cc7 LCG=95
+    - OS=slc6 LCG=94
+    - OS=slc6 LCG=95
 
-#matrix:
-  #include:
-    #- os: osx
-      #osx_image: xcode10.2
-      #before_install:
-        #- brew install eigen
-      #script:
-        #- mkdir build && cd build
-        #- cmake .. -DCMAKE_CXX_FLAGS="-std=c++17" -DACTS_BUILD_EXAMPLES=on -DACTS_BUILD_TESTS=on -DACTS_BUILD_INTEGRATION_TESTS=on -DACTS_BUILD_DIGITIZATION_PLUGIN=on -DACTS_BUILD_IDENTIFICATION_PLUGIN=on -DACTS_BUILD_JSON_PLUGIN=on -DACTS_BUILD_LEGACY=on
-        #- cmake --build . -- -j$(nproc)
-        #- cmake --build . -- test
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode10.2
+      before_install:
+        - brew install eigen
+      script:
+        - mkdir build && cd build
+        - cmake .. -DCMAKE_CXX_FLAGS="-std=c++17" -DACTS_BUILD_EXAMPLES=on -DACTS_BUILD_TESTS=on -DACTS_BUILD_INTEGRATION_TESTS=on -DACTS_BUILD_DIGITIZATION_PLUGIN=on -DACTS_BUILD_IDENTIFICATION_PLUGIN=on -DACTS_BUILD_JSON_PLUGIN=on -DACTS_BUILD_LEGACY=on
+        - cmake --build . -- -j$(nproc)
+        - cmake --build . -- test
     #- os: linux
       #sudo: required
       #before_install:

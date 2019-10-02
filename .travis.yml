@@ -68,10 +68,17 @@ jobs:
 
     - name: clang-format
       before_install: ""
+      install:
+        - sudo apt-get update
+        - sudo apt-get install clang-format-8
       stage: check
+      #script:
+        #- docker run -ti --name CI_container -v ${PWD}:/src -w /src -d gitlab-registry.cern.ch/acts/machines/check_llvm8 /bin/bash
+        #- docker exec -ti CI_container /bin/bash -c "CI/check_format ."
+      dist: bionic
       script:
-        - docker run -ti --name CI_container -v ${PWD}:/src -w /src -d gitlab-registry.cern.ch/acts/machines/check_llvm8 /bin/bash
-        - docker exec -ti CI_container /bin/bash -c "CI/check_format ."
+        - CI/check_format .
+
 
     - env: OS=cc7 LCG=94
       stage: build

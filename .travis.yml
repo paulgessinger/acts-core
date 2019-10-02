@@ -57,9 +57,10 @@ matrix:
   include:
     - os: linux
       env: OS=cc7 LCG=94
-    - os: linux
-      env: OS=cc7 LCG=95
-    - os: linux
-      env: OS=slc6 LCG=94
-    - os: linux
-      env: OS=slc6 LCG=95
+      script: echo "hallo"
+    #- os: linux
+      #env: OS=cc7 LCG=95
+    #- os: linux
+      #env: OS=slc6 LCG=94
+    #- os: linux
+      #env: OS=slc6 LCG=95

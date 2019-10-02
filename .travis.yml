@@ -27,6 +27,9 @@ script:
 env:
   matrix:
     - OS=cc7; LCG=94
+    - OS=slc6; LCG=95
+    - OS=slc6; LCG=95
+    - OS=slc6; LCG=95
 
 #matrix:
   #include:

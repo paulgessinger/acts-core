@@ -55,6 +55,7 @@ matrix:
         - sudo /etc/init.d/autofs stop
         - sudo cvmfs_config setup
         - sudo mkdir -p /cvmfs/sft.cern.ch
+        - sudo umount /cvmfs/sft.cern.ch || /bin/true
         - sudo mount -t cvmfs sft.cern.ch /cvmfs/sft.cern.ch
         - echo "Mounting completed"
         - ls /cvmfs/sft.cern.ch

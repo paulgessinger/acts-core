@@ -49,9 +49,15 @@ jobs:
         - cmake --build . -- test
     - before_install: ""
       stage: check
+      #script:
+        #- docker run -ti --name CI_container -v ${PWD}:/src -w /src -d python:alpine3.6 /bin/sh
+        #- docker exec -ti CI_container /bin/sh -c "apk add --no-cache git && CI/check_license.py ."
+      sudo: false
+      language: python
+      python: "3.6"
+      install: pip install -r CI/requirements.txt
       script:
-        - docker run -ti --name CI_container -v ${PWD}:/src -w /src -d python:alpine3.6 /bin/sh
-        - docker exec -ti CI_container /bin/sh -c "apk add --no-cache git && CI/check_license.py ."
+        - CI/check_license.py
     - before_install: ""
       stage: check
       script:

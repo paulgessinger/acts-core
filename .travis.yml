@@ -50,16 +50,16 @@ jobs:
     - before_install: ""
       stage: check
       script:
-        - docker run -ti --name CI_container -v ${PWD}:/src -w /src -d python:alpine3.6 /bin/bash
+        - docker run -ti --name CI_container -v ${PWD}:/src -w /src -d python:alpine3.6 /bin/sh
         - docker exec -ti CI_container /bin/bash -c "apk add --no-cache git && CI/check_license.py ."
     - before_install: ""
       stage: check
       script:
-        - docker run -ti --name CI_container -v ${PWD}:/src -w /src -d python:alpine3.6 /bin/bash
+        - docker run -ti --name CI_container -v ${PWD}:/src -w /src -d python:alpine3.6 /bin/sh
         - docker exec -ti CI_container /bin/bash -c "CI/check_include_guards.py . --fail-global"
     - stage: check
       script:
-        - docker run -ti --name CI_container -v ${PWD}:/src -w /src -d python:alpine3.6 /bin/bash
+        - docker run -ti --name CI_container -v ${PWD}:/src -w /src -d gitlab-registry.cern.ch/acts/machines/check_llvm8 /bin/bash
         - docker exec -ti CI_container /bin/bash -c "CI/check_format ."
     - env: OS=cc7 LCG=94
       stage: build

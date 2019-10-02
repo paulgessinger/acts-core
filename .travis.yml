@@ -57,7 +57,8 @@ jobs:
       script:
         - docker run -ti --name CI_container -v ${PWD}:/src -w /src -d python:alpine3.6 /bin/sh
         - docker exec -ti CI_container /bin/sh -c "CI/check_include_guards.py . --fail-global"
-    - stage: check
+    - before_install: ""
+      stage: check
       script:
         - docker run -ti --name CI_container -v ${PWD}:/src -w /src -d gitlab-registry.cern.ch/acts/machines/check_llvm8 /bin/bash
         - docker exec -ti CI_container /bin/bash -c "CI/check_format ."

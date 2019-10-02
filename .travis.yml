@@ -38,18 +38,6 @@ services:
 
 jobs:
   include:
-    - os: osx
-      osx_image: xcode10.2
-      stage: build
-      before_install:
-        - brew install eigen
-      before_script: []
-      script:
-        - mkdir build && cd build
-        - cmake .. -DCMAKE_CXX_FLAGS="-std=c++17" -DACTS_BUILD_EXAMPLES=on -DACTS_BUILD_TESTS=on -DACTS_BUILD_INTEGRATION_TESTS=on -DACTS_BUILD_DIGITIZATION_PLUGIN=on -DACTS_BUILD_IDENTIFICATION_PLUGIN=on -DACTS_BUILD_JSON_PLUGIN=on -DACTS_BUILD_LEGACY=on
-        - cmake --build . -- -j$(nproc)
-        - cmake --build . -- test
-
     - name: license check
       before_install: ""
       stage: check
@@ -80,17 +68,35 @@ jobs:
         - sudo apt-get update
         - sudo apt-get install -y clang-format-8
       stage: check
+      services: []
       dist: bionic
       before_script: []
       script:
         - PATH=/usr/lib/llvm-8/bin/:$PATH CI/check_format .
 
-
-    - env: OS=cc7 LCG=94
+    - os: osx
+      osx_image: xcode10.2
       stage: build
+      services: []
       cache: &ccache
         directories:
         - $HOME/.ccache
+      before_install:
+        - brew install eigen
+      before_script: []
+      install:
+        - brew install ccache ninja
+        - export PATH="/usr/local/opt/ccache/libexec:$PATH"
+      script:
+        - mkdir build && cd build
+        - CXX="ccache $CXX" cmake .. -GNinja -DCMAKE_CXX_FLAGS="-std=c++17 -Werror" -DACTS_BUILD_EXAMPLES=on -DACTS_BUILD_TESTS=on -DACTS_BUILD_INTEGRATION_TESTS=on -DACTS_BUILD_DIGITIZATION_PLUGIN=on -DACTS_BUILD_IDENTIFICATION_PLUGIN=on -DACTS_BUILD_JSON_PLUGIN=on -DACTS_BUILD_LEGACY=on
+        - cmake --build .
+        - cmake --build . -- test
+
+    - env: OS=cc7 LCG=94
+      stage: build
+      cache:
+        <<: *ccache
 
     - env: OS=cc7 LCG=95
       stage: build

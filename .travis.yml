@@ -70,7 +70,8 @@ jobs:
       before_install: ""
       install:
         - sudo apt-get update
-        - sudo apt-get install clang-format-8
+        - sudo apt-get install -y clang-format-8
+        - ln -s $(which clang-format-8) /usr/bin/clang-format
       stage: check
       #script:
         #- docker run -ti --name CI_container -v ${PWD}:/src -w /src -d gitlab-registry.cern.ch/acts/machines/check_llvm8 /bin/bash

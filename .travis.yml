@@ -47,7 +47,7 @@ jobs:
     - name: license check
       before_install: ""
       stage: check
-      service: []
+      services: []
       sudo: false
       language: python
       python: "3.6"
@@ -58,7 +58,7 @@ jobs:
     - name: include guards
       before_install: ""
       stage: check
-      service: []
+      services: []
       sudo: false
       language: python
       python: "3.6"
@@ -71,6 +71,7 @@ jobs:
       install:
         - sudo apt-get update
         - sudo apt-get install -y clang-format-8
+        - which clang-format
         - sudo ln -sf $(which clang-format-8) /usr/bin/clang-format
       stage: check
       #script:

@@ -14,7 +14,6 @@ before_install:
   - sudo mv default.local /etc/cvmfs/default.local
   - sudo /etc/init.d/autofs stop
   - sudo cvmfs_config setup
-  - sudo umount -f /cvmfs/sft.cern.ch
   - sudo mkdir -p /cvmfs/sft.cern.ch
   - sudo mount -t cvmfs sft.cern.ch /cvmfs/sft.cern.ch
   - echo "Mounting completed"

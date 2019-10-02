@@ -77,7 +77,7 @@ jobs:
         #- docker exec -ti CI_container /bin/bash -c "CI/check_format ."
       dist: bionic
       script:
-        - PATH=/usr/lib/llvm-8/bin/ CI/check_format .
+        - PATH=/usr/lib/llvm-8/bin/:$PATH CI/check_format .
 
 
     - env: OS=cc7 LCG=94

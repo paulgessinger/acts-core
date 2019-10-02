@@ -81,11 +81,10 @@ jobs:
       cache: &ccache
         directories:
         - $HOME/.ccache
-      before_install:
-        - brew install eigen
+      before_install: []
       before_script: []
       install:
-        - brew install ccache ninja
+        - brew install ccache ninja eigen
         - export PATH="/usr/local/opt/ccache/libexec:$PATH"
       script:
         - mkdir build && cd build
@@ -109,7 +108,7 @@ jobs:
         - echo "Collecting coverage"
         #- cd build
         #- env -i bash ../CI/coverage_environment.sh "../CI/test_coverage --gcov $(which gcov)"
-        - docker exec -ti CI_container /bin/bash -c "cd build && ../CI/coverage_environment.sh \"../CI/test_coverage --gcov $(which gcov)\"""
+        - docker exec -ti CI_container /bin/bash -c "cd build && ../CI/coverage_environment.sh \"../CI/test_coverage --gcov $(which gcov)\""
       cache:
         <<: *ccache
 

@@ -29,11 +29,11 @@ script:
   - docker exec -ti CI_container /bin/bash -c "source CI/setup_lcg$LCG.sh && mkdir build && cd build && cmake .. -DACTS_BUILD_EXAMPLES=on -DACTS_BUILD_TESTS=on -DACTS_BUILD_INTEGRATION_TESTS=on -DACTS_BUILD_DIGITIZATION_PLUGIN=on -DACTS_BUILD_IDENTIFICATION_PLUGIN=on -DACTS_BUILD_JSON_PLUGIN=on -DACTS_BUILD_LEGACY=on -DACTS_BUILD_DD4HEP_PLUGIN=on -DACTS_BUILD_TGEO_PLUGIN=on && cmake --build . -- -j$(nproc) && cmake --build . -- test"
 
 env:
-  matrix:
-    - OS=cc7 LCG=94
-    - OS=cc7 LCG=95
-    - OS=slc6 LCG=94
-    - OS=slc6 LCG=95
+  #matrix:
+    #- OS=cc7 LCG=94
+    #- OS=cc7 LCG=95
+    #- OS=slc6 LCG=94
+    #- OS=slc6 LCG=95
 
 jobs:
   include:
@@ -61,6 +61,15 @@ jobs:
       script:
         - docker run -ti --name CI_container -v ${PWD}:/src -w /src -d python:alpine3.6 /bin/bash
         - docker exec -ti CI_container /bin/bash -c "CI/check_format ."
+    - env: OS=cc7 LCG=94
+      stage: build
+    - env: OS=cc7 LCG=95
+      stage: build
+    - env: OS=slc6 LCG=94
+      stage: build
+    - env: OS=slc6 LCG=95
+      stage: build
+
 
 
 #before_install:

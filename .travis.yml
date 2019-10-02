@@ -71,15 +71,13 @@ jobs:
       install:
         - sudo apt-get update
         - sudo apt-get install -y clang-format-8
-        - which clang-format
-        - sudo ln -sf $(which clang-format-8) /usr/bin/clang-format
       stage: check
       #script:
         #- docker run -ti --name CI_container -v ${PWD}:/src -w /src -d gitlab-registry.cern.ch/acts/machines/check_llvm8 /bin/bash
         #- docker exec -ti CI_container /bin/bash -c "CI/check_format ."
       dist: bionic
       script:
-        - CI/check_format .
+        - PATH=/usr/lib/llvm-8/bin/ CI/check_format .
 
 
     - env: OS=cc7 LCG=94

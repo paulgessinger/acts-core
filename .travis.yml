@@ -101,8 +101,9 @@ jobs:
       stage: build
       after_script:
         - echo "Collecting coverage"
-        - cd build
-        - env -i bash ../CI/coverage_environment.sh "../CI/test_coverage --gcov $(which gcov)"
+        #- cd build
+        #- env -i bash ../CI/coverage_environment.sh "../CI/test_coverage --gcov $(which gcov)"
+        - docker exec -ti CI_container /bin/bash -c "cd build && ../CI/coverage_environment.sh \"../CI/test_coverage --gcov $(which gcov)\"""
       cache:
         <<: *ccache
 

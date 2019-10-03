@@ -83,6 +83,7 @@ jobs:
         - $HOME/.ccache
       before_install: []
       before_script: []
+      env: HOMEBREW_NO_INSTALL_CLEANUP=yes
       install:
         - brew install ccache ninja eigen
         - export PATH="/usr/local/opt/ccache/libexec:$PATH"
@@ -110,7 +111,8 @@ jobs:
         #- env -i bash ../CI/coverage_environment.sh "../CI/test_coverage --gcov $(which gcov)"
         - docker exec -ti CI_container /bin/bash -c "cd build && /bin/bash ../CI/coverage_environment.sh \"../CI/test_coverage --gcov $(which gcov)\""
       cache:
-        <<: *ccache
+        directories:
+        - build
 
     - env: OS=slc6 LCG=95
       stage: build

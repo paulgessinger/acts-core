@@ -75,6 +75,8 @@ if not os.path.exists(coverage_dir):
 
 excludes = ["-e", "../Tests/", "-e", "../Legacy"]
 
+call(gcovr + ["--version"])
+
 # create the html report
 call(gcovr
      + ["-r", source_dir]

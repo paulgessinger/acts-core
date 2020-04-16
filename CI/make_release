@@ -1,0 +1,3 @@
+#!/bin/bash
+
+gren release --config=.github/gren.json -T 4bbbb8cebd93b4ea24016844d00ffca2bab0c841

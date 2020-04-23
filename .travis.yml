@@ -7,7 +7,7 @@ os: linux
 before_install:
 
 before_script:
-  - docker run -ti --name CI_container -v "${PWD}:/src:rw" -d gitlab-registry.cern.ch/acts/machines/ubuntu1910 /bin/bash
+  - docker run -ti --name CI_container -v "${PWD}:/src:rw" -w /src -d gitlab-registry.cern.ch/acts/machines/ubuntu1910 /bin/bash
 
 script:
   - >

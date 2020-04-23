@@ -11,8 +11,8 @@
 #include "Acts/Surfaces/ConvexPolygonBounds.hpp"
 #include "Acts/Surfaces/PlaneSurface.hpp"
 #include "Acts/Surfaces/Surface.hpp"
-#include "Acts/Utilities/IVisualization.hpp"
 #include "Acts/Utilities/ThrowAssert.hpp"
+#include "Acts/Visualization/IVisualization.hpp"
 
 #include <array>
 #include <ostream>
@@ -35,10 +35,6 @@ Acts::GenericCuboidVolumeBounds::GenericCuboidVolumeBounds(
         Vector3D(values[iv * 3], values[iv * 3 + 1], values[iv * 3 + 2]);
   }
   construct();
-}
-
-Acts::VolumeBounds* Acts::GenericCuboidVolumeBounds::clone() const {
-  return new GenericCuboidVolumeBounds(*this);
 }
 
 bool Acts::GenericCuboidVolumeBounds::inside(const Acts::Vector3D& gpos,

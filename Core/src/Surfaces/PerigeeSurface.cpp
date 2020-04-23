@@ -38,16 +38,6 @@ Acts::PerigeeSurface& Acts::PerigeeSurface::operator=(
   return *this;
 }
 
-std::shared_ptr<Acts::PerigeeSurface> Acts::PerigeeSurface::clone(
-    const GeometryContext& gctx, const Transform3D& shift) const {
-  return std::shared_ptr<PerigeeSurface>(this->clone_impl(gctx, shift));
-}
-
-Acts::PerigeeSurface* Acts::PerigeeSurface::clone_impl(
-    const GeometryContext& gctx, const Transform3D& shift) const {
-  return new PerigeeSurface(gctx, *this, shift);
-}
-
 Acts::Surface::SurfaceType Acts::PerigeeSurface::type() const {
   return Surface::Perigee;
 }
@@ -72,8 +62,8 @@ Acts::Polyhedron Acts::PerigeeSurface::polyhedronRepresentation(
     const GeometryContext& gctx, size_t /*lseg*/) const {
   // Prepare vertices and faces
   std::vector<Vector3D> vertices;
-  std::vector<Polyhedron::Face> faces;
-  std::vector<Polyhedron::Face> triangularMesh;
+  std::vector<Polyhedron::FaceType> faces;
+  std::vector<Polyhedron::FaceType> triangularMesh;
 
   const Transform3D& ctransform = transform(gctx);
   Vector3D left(0, 0, -100.);

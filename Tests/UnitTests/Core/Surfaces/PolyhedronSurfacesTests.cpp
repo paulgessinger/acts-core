@@ -44,8 +44,8 @@
 #include "Acts/Surfaces/LineBounds.hpp"
 #include "Acts/Surfaces/StrawSurface.hpp"
 
-#include "Acts/Utilities/ObjHelper.hpp"
 #include "Acts/Utilities/Units.hpp"
+#include "Acts/Visualization/ObjVisualization.hpp"
 
 #include <fstream>
 #include <tuple>

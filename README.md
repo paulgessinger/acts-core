@@ -1,5 +1,7 @@
 # A Common Tracking Software (Acts) Project
 
+[![coverage](https://badgen.net/codecov/c/github/acts-project/acts/master)](https://codecov.io/gh/acts-project/acts/branch/master) [![10.5281/zenodo.3606011](https://badgen.net/badge/DOI/10.5281%2Fzenodo.3606011/blue)](https://doi.org/10.5281/zenodo.3606011) [![Chat on Mattermost](https://badgen.net/badge/chat/on%20mattermost/cyan)](https://mattermost.web.cern.ch/acts/)
+
 1. [Introduction](#intro)
 2. [Mailing list](#mailing-list)
 6. [License and authors](#license-authors)
@@ -43,16 +45,19 @@ If you find a bug, have a feature request, or want to contribute to Acts, please
 
 # <a name="license-authors">License and authors</a>
 
-This project is published under the Mozilla Public License, v. 2.0. Details of
-this license can be found in the [LICENSE](LICENSE) file or at
-http://mozilla.org/MPL/2.0/.
+This project is published under the terms of the Mozilla Public License, v. 2.0.
+A copy of the license can be found in the [LICENSE](LICENSE) file or at
+http://mozilla.org/MPL/2.0/ .
 
-Contributors to the Acts project are listed in [AUTHORS](AUTHORS).
-
-The Acts project contains a copy of [gcovr](http://gcovr.com) licensed under
-the 3-Clause BSD license.
-
-This software contains a copy of the `JSON for Modern C++`-library by Niels Lohmann licensed under the MIT License.
+Contributors to the Acts project are listed in the [AUTHORS](AUTHORS.md) file.
 
 The Acts project is based on the ATLAS tracking software. A list of contributors
-to the ATLAS tracking repository can be found <a href="http://acts.web.cern.ch/ACTS/ATLAS_authors.html">here</a>.
+to the ATLAS tracking repository can be found at
+http://acts.web.cern.ch/ACTS/ATLAS_authors.html .
+
+The Acts project contains copies of the following external packages:
+
+*   [dfelibs](https:://gitlab.cern.ch/msmk/dfelibs) by Moritz Kiehn licensed
+    under the MIT license.
+*   [JSON for Modern C++](https://github.com/nlohmann/json) by Niels Lohmann
+    licensed under the MIT License.

@@ -52,9 +52,6 @@ BOOST_AUTO_TEST_CASE(DiamondBoundsProperties) {
   /// Test clone
   DiamondBounds diamondBoundsObject(minHalfX, midHalfX, maxHalfX, halfY1,
                                     halfY2);
-  auto pClonedDiamondBoundsObject = diamondBoundsObject.clone();
-  BOOST_CHECK_NE(pClonedDiamondBoundsObject, nullptr);
-  delete pClonedDiamondBoundsObject;
   //
   /// Test type() (redundant; already used in constructor confirmation)
   BOOST_CHECK_EQUAL(diamondBoundsObject.type(), SurfaceBounds::eDiamond);
@@ -82,7 +79,7 @@ BOOST_AUTO_TEST_CASE(DiamondBoundsProperties) {
   //
   /// Test boundingBox
   BOOST_CHECK_EQUAL(diamondBoundsObject.boundingBox(),
-                    RectangleBounds(50., 20.));
+                    RectangleBounds(Vector2D{-50., -10.}, Vector2D{50., 20.}));
   //
   // clone already tested
   //

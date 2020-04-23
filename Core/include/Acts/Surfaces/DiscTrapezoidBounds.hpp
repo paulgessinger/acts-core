@@ -61,8 +61,6 @@ class DiscTrapezoidBounds : public DiscBounds {
 
   ~DiscTrapezoidBounds() override = default;
 
-  DiscTrapezoidBounds* clone() const final;
-
   SurfaceBounds::BoundsType type() const final;
 
   /// Return the bound values as dynamically sized vector
@@ -136,7 +134,6 @@ class DiscTrapezoidBounds : public DiscBounds {
 
  private:
   std::array<double, eSize> m_values;
-  double m_stereo;  // TODO 2017-04-09 msmk: what is this good for?
 
   /// Check the input values for consistency, will throw a logic_exception
   /// if consistency is not given
@@ -164,7 +161,7 @@ inline double DiscTrapezoidBounds::rMax() const {
 }
 
 inline double DiscTrapezoidBounds::stereo() const {
-  return m_stereo;
+  return get(eStereo);
 }
 
 inline double DiscTrapezoidBounds::halfPhiSector() const {

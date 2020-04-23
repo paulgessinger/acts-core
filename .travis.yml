@@ -32,6 +32,7 @@ script:
     && cmake --build . -- test
     && pip3 install gcovr
     && /usr/bin/python3 ../CI/test_coverage
+    && bash <(curl -s https://codecov.io/bash)
     "
 
 services:

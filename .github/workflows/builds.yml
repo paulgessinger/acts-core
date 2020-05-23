@@ -34,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install requirements
-        run: pip3 install psutil
+        run: pip3 install psutil && apt-get update && apt-get install -y bsdmainutils
       - name: Configure
         run: >
           cmake -B build -S .

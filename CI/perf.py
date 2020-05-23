@@ -52,10 +52,13 @@ def main():
         #  print(mem)
         maxmem = max(mem, maxmem)
         time.sleep(0.1)
-        sys.stdout.write(f"\r{file}: {mem*1e-9:.2f}G")
+        if sys.stdout.isatty():
+          sys.stdout.write(f"\r{file}: {mem*1e-9:.2f}G")
       end = datetime.now()
       delta = end - start
 
+      if not sys.stdout.isatty():
+        print(file)
       print(f"\n => max: {maxmem*1e-9:.2f}G, {delta}")
       writer.writerow([file, maxmem, delta.total_seconds()])
       fh.flush()

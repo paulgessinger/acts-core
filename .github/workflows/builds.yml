@@ -15,10 +15,6 @@ jobs:
     container: gitlab-registry.cern.ch/acts/machines/ubuntu2004:master
     steps:
       - uses: actions/checkout@v2
-
-      - name: Install requirements
-        run: pip3 install psutil
-
       - name: Configure
         run: >
           cmake -B build -S .
@@ -37,6 +33,8 @@ jobs:
     container: gitlab-registry.cern.ch/acts/machines/ubuntu2004:master
     steps:
       - uses: actions/checkout@v2
+      - name: Install requirements
+        run: pip3 install psutil
       - name: Configure
         run: >
           cmake -B build -S .

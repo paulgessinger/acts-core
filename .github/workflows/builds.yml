@@ -15,6 +15,10 @@ jobs:
     container: gitlab-registry.cern.ch/acts/machines/ubuntu2004:master
     steps:
       - uses: actions/checkout@v2
+
+      - name: Install requirements
+        run: pip3 install psutil
+
       - name: Configure
         run: >
           cmake -B build -S .
@@ -28,6 +32,23 @@ jobs:
         run: cmake --build build -- test
       - name: Integration tests
         run: cmake --build build -- integrationtests
+  build_perf:
+    runs-on: ubuntu-latest
+    container: gitlab-registry.cern.ch/acts/machines/ubuntu2004:master
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configure
+        run: >
+          cmake -B build -S .
+          -GNinja
+          -DCMAKE_BUILD_TYPE=Release
+          -DCMAKE_CXX_FLAGS=-Werror
+          -DCMAKE_EXPORT_COMPILE_COMMANDS=on
+          -DACTS_BUILD_EVERYTHING=on
+      - name: Build
+        run: CI/perf.py build/compile_commands.json
+      - name: Results
+        run: sort -t, -n -k2 -r build_timing.csv |column -t -s,
   macos:
     runs-on: macos-10.15
     steps:

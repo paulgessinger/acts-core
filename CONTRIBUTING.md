@@ -16,7 +16,7 @@ Contributions to the Acts project are very welcome and feedback on the documenta
 5. [Administrator's corner](#admin-corner)
     1. [Making a new Acts release](#tag-release)
 
-## <a name="mailing-lists">Mailing lists</a>
+## Mailing lists
 
 1. [acts-users@cern.ch](https://e-groups.cern.ch/e-groups/Egroup.do?egroupName=acts-users): Users of the Acts project should subscribe to this list as it provides
     - regular updates on the software,

@@ -9,6 +9,7 @@
 #pragma once
 
 #include "Acts/Definitions/Algebra.hpp"
+#include "Acts/MagneticField/BFieldProvider.hpp"
 #include "Acts/MagneticField/MagneticFieldContext.hpp"
 
 namespace ActsExamples {
@@ -26,7 +27,7 @@ struct ScalableBFieldContext {
 ///
 /// This class is based on the constant magnetic field class
 /// but allows a event based context
-class ScalableBField final {
+class ScalableBField final : public Acts::BFieldProvider {
  public:
   struct Cache {
     double scalor = 1.;
@@ -57,7 +58,7 @@ class ScalableBField final {
   ///
   /// @note The @p position is ignored and only kept as argument to provide
   ///       a consistent interface with other magnetic field services.
-  Acts::Vector3 getField(const Acts::Vector3& /*position*/) const {
+  Acts::Vector3 getField(const Acts::Vector3& /*position*/) const override {
     return m_BField;
   }
 
@@ -70,7 +71,8 @@ class ScalableBField final {
   /// @note The @p position is ignored and only kept as argument to provide
   ///       a consistent interface with other magnetic field services.
   Acts::Vector3 getField(const Acts::Vector3& /*position*/,
-                         Cache& cache) const {
+                         BFieldProvider::Cache& gCache) const override {
+    Cache& cache = gCache.get<Cache>();
     return m_BField * cache.scalor;
   }
 
@@ -85,8 +87,9 @@ class ScalableBField final {
   ///       a consistent interface with other magnetic field services.
   /// @note currently the derivative is not calculated
   /// @todo return derivative
-  Acts::Vector3 getFieldGradient(const Acts::Vector3& /*position*/,
-                                 Acts::ActsMatrix<3, 3>& /*derivative*/) const {
+  Acts::Vector3 getFieldGradient(
+      const Acts::Vector3& /*position*/,
+      Acts::ActsMatrix<3, 3>& /*derivative*/) const override {
     return m_BField;
   }
 
@@ -104,8 +107,14 @@ class ScalableBField final {
   /// @todo return derivative
   Acts::Vector3 getFieldGradient(const Acts::Vector3& /*position*/,
                                  Acts::ActsMatrix<3, 3>& /*derivative*/,
-                                 Cache& cache) const {
+                                 BFieldProvider::Cache& gCache) const override {
+    Cache& cache = gCache.get<Cache>();
     return m_BField * cache.scalor;
+  }
+
+  Acts::BFieldProvider::Cache makeCache(
+      const Acts::MagneticFieldContext& mctx) const override {
+    return Acts::BFieldProvider::Cache::make<Cache>(mctx);
   }
 
   /// @brief check whether given 3D position is inside look-up domain
@@ -131,7 +140,7 @@ class ScalableBField final {
  private:
   /// magnetic field vector
   Acts::Vector3 m_BField;
-};
+};  // namespace BField
 
 }  // namespace BField
 }  // namespace ActsExamples

@@ -55,7 +55,7 @@ ActsExamples::TrackFindingAlgorithm::makeTrackFinderFunction(
         using InputMagneticField =
             typename std::decay_t<decltype(inputField)>::element_type;
         using MagneticField = Acts::SharedBField<InputMagneticField>;
-        using Stepper = Acts::EigenStepper<MagneticField>;
+        using Stepper = Acts::EigenStepper<>;
         using Navigator = Acts::Navigator;
         using Propagator = Acts::Propagator<Stepper, Navigator>;
         using CKF =

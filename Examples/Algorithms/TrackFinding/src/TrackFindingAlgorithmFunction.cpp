@@ -62,7 +62,7 @@ ActsExamples::TrackFindingAlgorithm::makeTrackFinderFunction(
             Acts::CombinatorialKalmanFilter<Propagator, Updater, Smoother>;
 
         // construct all components for the track finder
-        MagneticField field(std::move(inputField));
+        auto field = std::make_shared<MagneticField>(std::move(inputField));
         Stepper stepper(std::move(field));
         Navigator navigator(trackingGeometry);
         navigator.resolvePassive = false;

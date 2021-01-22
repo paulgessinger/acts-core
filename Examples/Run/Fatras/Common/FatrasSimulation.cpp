@@ -77,13 +77,12 @@ struct HitSurfaceSelector {
 /// @param sequencer The framework sequencer
 /// @param randomNumbers The random number service
 /// @param trackingGeometry The TrackingGeometry for the tracking setup
-template <typename magnetic_field_t>
 void setupSimulationAlgorithms(
     const ActsExamples::Options::Variables& vars,
     ActsExamples::Sequencer& sequencer,
     std::shared_ptr<const ActsExamples::RandomNumbers> randomNumbers,
     std::shared_ptr<const Acts::TrackingGeometry> trackingGeometry,
-    magnetic_field_t&& magneticField) {
+    std::shared_ptr<Acts::BFieldProvider> magneticField) {
   using namespace ActsExamples;
 
   // Read the log level
@@ -93,7 +92,7 @@ void setupSimulationAlgorithms(
   // use the default navigation
   using Navigator = Acts::Navigator;
   // propagate charged particles numerically in the given magnetic field
-  using ChargedStepper = Acts::EigenStepper<magnetic_field_t>;
+  using ChargedStepper = Acts::EigenStepper<>;
   using ChargedPropagator = Acts::Propagator<ChargedStepper, Navigator>;
   // propagate neutral particles with just straight lines
   using NeutralStepper = Acts::StraightLineStepper;
@@ -121,7 +120,7 @@ void setupSimulationAlgorithms(
   // construct the simulator
   Navigator navigator(trackingGeometry);
   // construct the charged simulator
-  ChargedStepper chargedStepper(std::move(magneticField));
+  ChargedStepper chargedStepper(magneticField);
   ChargedPropagator chargedPropagator(std::move(chargedStepper), navigator);
   ChargedSimulator chargedSimulator(std::move(chargedPropagator), logLevel);
   // construct the neutral simulator
@@ -217,9 +216,10 @@ void setupSimulation(
       [&](auto&& inputField) {
         using magnetic_field_t =
             typename std::decay_t<decltype(inputField)>::element_type;
-        Acts::SharedBField<magnetic_field_t> magneticField(inputField);
+        auto magneticField =
+            std::make_shared<Acts::SharedBField<magnetic_field_t> >(inputField);
         setupSimulationAlgorithms(vars, sequencer, randomNumbers,
-                                  trackingGeometry, std::move(magneticField));
+                                  trackingGeometry, magneticField);
       },
       magneticFieldVariant);
 }

@@ -82,7 +82,7 @@ void setupSimulationAlgorithms(
     ActsExamples::Sequencer& sequencer,
     std::shared_ptr<const ActsExamples::RandomNumbers> randomNumbers,
     std::shared_ptr<const Acts::TrackingGeometry> trackingGeometry,
-    std::shared_ptr<Acts::BFieldProvider> magneticField) {
+    std::shared_ptr<const Acts::BFieldProvider> magneticField) {
   using namespace ActsExamples;
 
   // Read the log level
@@ -211,15 +211,7 @@ void setupSimulation(
     ActsExamples::Sequencer& sequencer,
     std::shared_ptr<const ActsExamples::RandomNumbers> randomNumbers,
     std::shared_ptr<const Acts::TrackingGeometry> trackingGeometry) {
-  auto magneticFieldVariant = ActsExamples::Options::readBField(vars);
-  std::visit(
-      [&](auto&& inputField) {
-        using magnetic_field_t =
-            typename std::decay_t<decltype(inputField)>::element_type;
-        auto magneticField =
-            std::make_shared<Acts::SharedBField<magnetic_field_t> >(inputField);
-        setupSimulationAlgorithms(vars, sequencer, randomNumbers,
-                                  trackingGeometry, magneticField);
-      },
-      magneticFieldVariant);
+  auto magneticField = ActsExamples::Options::readBField(vars);
+  setupSimulationAlgorithms(vars, sequencer, randomNumbers, trackingGeometry,
+                            magneticField);
 }

@@ -84,15 +84,11 @@ void addBFieldOptions(boost::program_options::options_description& opt) {
 }
 
 // create the bfield maps
-BFieldVariant readBField(const boost::program_options::variables_map& vm) {
+std::shared_ptr<const Acts::BFieldProvider> readBField(
+    const boost::program_options::variables_map& vm) {
   std::string bfieldmap = "constfield";
 
   enum BFieldMapType { constant = 0, root = 1, text = 2 };
-
-  std::shared_ptr<InterpolatedBFieldMap2D> map2D = nullptr;
-  std::shared_ptr<InterpolatedBFieldMap3D> map3D = nullptr;
-  std::shared_ptr<Acts::ConstantBField> mapConst = nullptr;
-  std::shared_ptr<ActsExamples::BField::ScalableBField> mapScale = nullptr;
 
   int bfieldmaptype = constant;
   if (vm.count("bf-map") && vm["bf-map"].template as<std::string>() != "") {

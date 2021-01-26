@@ -9,6 +9,7 @@
 #pragma once
 
 #include "Acts/Definitions/Algebra.hpp"
+#include "Acts/MagneticField/BFieldProvider.hpp"
 #include "Acts/Utilities/detail/AxisFwd.hpp"
 #include "Acts/Utilities/detail/GridFwd.hpp"
 #include "ActsExamples/Utilities/OptionsFwd.hpp"
@@ -61,7 +62,8 @@ using BFieldVariant =
 void addBFieldOptions(boost::program_options::options_description& opt);
 
 // create the bfield maps
-BFieldVariant readBField(const boost::program_options::variables_map& vm);
+std::shared_ptr<const Acts::BFieldProvider> readBField(
+    const boost::program_options::variables_map& vm);
 
 }  // namespace Options
 }  // namespace ActsExamples

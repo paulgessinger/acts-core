@@ -32,6 +32,7 @@
 #include "ActsExamples/Utilities/Options.hpp"
 #include "ActsExamples/Utilities/Paths.hpp"
 #include <Acts/Definitions/Units.hpp>
+#include <Acts/MagneticField/BFieldProvider.hpp>
 
 #include <memory>
 
@@ -90,7 +91,8 @@ int runRecCKFTracks(int argc, char* argv[],
     sequencer.addContextDecorator(cdr);
   }
   // Setup the magnetic field
-  auto magneticField = Options::readBField(vm);
+  std::shared_ptr<const Acts::BFieldProvider> magneticField =
+      Options::readBField(vm);
 
   // Read the sim hits
   auto simHitReaderCfg = setupSimHitReading(vm, sequencer);

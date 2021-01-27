@@ -52,12 +52,6 @@ namespace ActsExamples {
 
 namespace Options {
 
-using BFieldVariant =
-    std::variant<std::shared_ptr<InterpolatedBFieldMap2D>,
-                 std::shared_ptr<InterpolatedBFieldMap3D>,
-                 std::shared_ptr<Acts::ConstantBField>,
-                 std::shared_ptr<ActsExamples::BField::ScalableBField>>;
-
 // common bfield options, with a bf prefix
 void addBFieldOptions(boost::program_options::options_description& opt);
 

@@ -333,8 +333,8 @@ BOOST_AUTO_TEST_CASE(Reset) {
 
   auto copyState = [&](auto& field, const auto& other) {
     using field_t = std::decay_t<decltype(field)>;
-    std::decay_t<decltype(other)> copy(geoCtx, magCtx, cp, ndir, stepSize,
-                                       tolerance);
+    std::decay_t<decltype(other)> copy(geoCtx, field.makeCache(magCtx), cp,
+                                       ndir, stepSize, tolerance);
 
     copy.state_ready = other.state_ready;
     copy.navDir = other.navDir;
@@ -370,7 +370,7 @@ BOOST_AUTO_TEST_CASE(Reset) {
   };
 
   // Reset all possible parameters
-  Stepper::State stateCopy(copyState(magneticField, state.stepping));
+  Stepper::State stateCopy(copyState(*magneticField, state.stepping));
   stepper.resetState(stateCopy, cp.parameters(), *cp.covariance(),
                      cp.referenceSurface(), ndir, stepSize);
   // Test all components
@@ -392,7 +392,7 @@ BOOST_AUTO_TEST_CASE(Reset) {
   BOOST_CHECK_EQUAL(stateCopy.tolerance, state.stepping.tolerance);
 
   // Reset all possible parameters except the step size
-  stateCopy = copyState(magneticField, state.stepping);
+  stateCopy = copyState(*magneticField, state.stepping);
   stepper.resetState(stateCopy, cp.parameters(), *cp.covariance(),
                      cp.referenceSurface(), ndir);
   // Test all components
@@ -415,7 +415,7 @@ BOOST_AUTO_TEST_CASE(Reset) {
   BOOST_CHECK_EQUAL(stateCopy.tolerance, state.stepping.tolerance);
 
   // Reset the least amount of parameters
-  stateCopy = copyState(magneticField, state.stepping);
+  stateCopy = copyState(*magneticField, state.stepping);
   stepper.resetState(stateCopy, cp.parameters(), *cp.covariance(),
                      cp.referenceSurface());
   // Test all components
@@ -450,7 +450,7 @@ BOOST_AUTO_TEST_CASE(Reset) {
                                  unitDir, newAbsMom, newCharge, newCov);
 
   // Reset the state and test
-  Stepper::State stateDisc = copyState(magneticField, state.stepping);
+  Stepper::State stateDisc = copyState(*magneticField, state.stepping);
   stepper.resetState(stateDisc, boundDisc.parameters(), *boundDisc.covariance(),
                      boundDisc.referenceSurface());
 
@@ -470,7 +470,7 @@ BOOST_AUTO_TEST_CASE(Reset) {
                                     newAbsMom, newCharge, newCov);
 
   // Reset the state and test
-  Stepper::State statePerigee = copyState(magneticField, state.stepping);
+  Stepper::State statePerigee = copyState(*magneticField, state.stepping);
   stepper.resetState(statePerigee, boundPerigee.parameters(),
                      *boundPerigee.covariance(),
                      boundPerigee.referenceSurface());
@@ -485,7 +485,7 @@ BOOST_AUTO_TEST_CASE(Reset) {
                                   unitDir, newAbsMom, newCharge, newCov);
 
   // Reset the state and test
-  Stepper::State stateStraw = copyState(magneticField, state.stepping);
+  Stepper::State stateStraw = copyState(*magneticField, state.stepping);
   stepper.resetState(stateStraw, boundStraw.parameters(),
                      *boundStraw.covariance(), boundStraw.referenceSurface());
   CHECK_NE_COLLECTIONS(stateStraw.pVector, stateCopy.pVector);

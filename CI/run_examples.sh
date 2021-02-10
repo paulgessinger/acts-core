@@ -18,6 +18,7 @@ run_example() {
 
 
 export G4ENSDFSTATEDATA=/tmp/G4ENSDFSTATE
+mkdir -p $G4ENSDFSTATEDATA
 curl -L https://geant4-data.web.cern.ch/datasets/G4ENSDFSTATE.2.3.tar.gz | tar -xz -C $G4ENSDFSTATEDATA
 
 # Run hello world example

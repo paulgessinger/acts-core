@@ -26,8 +26,7 @@ run_example ActsExampleHelloWorld
 # these examples are fast enough.
 #
 run_example ActsExampleGeometryAligned
-# FIXME: Cannot enable DD4hep yet due to a variation of issue #697
-# run_example ActsExampleGeometryDD4hep ${DD4HEP_INPUT}
+run_example ActsExampleGeometryDD4hep ${DD4HEP_INPUT}
 run_example ActsExampleGeometryEmpty
 run_example ActsExampleGeometryGeneric
 run_example ActsExampleGeometryPayload
@@ -42,8 +41,7 @@ run_example ActsExampleGeometryTelescope
 # Sequencer actually runs.
 #
 run_example ActsExamplePropagationAligned
-# FIXME: Cannot enable DD4hep yet due to a variation of issue #697
-# run_example ActsExamplePropagationDD4hep ${DD4HEP_INPUT}
+run_example ActsExamplePropagationDD4hep ${DD4HEP_INPUT}
 run_example ActsExampleGeometryEmpty
 run_example ActsExampleGeometryGeneric
 run_example ActsExampleGeometryPayload
@@ -61,8 +59,7 @@ run_example ActsExamplePythia8
 #        thread-unsafe Geant4 code is accidentally run outside of the
 #        mutex-protected region of the code. See issue #207 .
 #
-# FIXME: Cannot enable DD4hep yet due to a variation of issue #697
-# run_example ActsExampleGeantinoRecordingDD4hep ${DD4HEP_INPUT} -j1
+run_example ActsExampleGeantinoRecordingDD4hep ${DD4HEP_INPUT} -j1
 # TODO: Add GDML version (needs an input file + knowhow)
 
 # Run material validation example (generic-only, see above)

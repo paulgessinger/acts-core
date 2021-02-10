@@ -16,6 +16,10 @@ run_example() {
     time ${BUILD_DIR}/bin/$* -n ${NUM_EVENTS}
 }
 
+
+export G4ENSDFSTATEDATA=/tmp/G4ENSDFSTATE
+curl -L https://geant4-data.web.cern.ch/datasets/G4ENSDFSTATE.2.3.tar.gz | tar -xz -C $G4ENSDFSTATEDATA
+
 # Run hello world example
 run_example ActsExampleHelloWorld
 

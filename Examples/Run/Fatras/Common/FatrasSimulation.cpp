@@ -215,8 +215,7 @@ void setupSimulation(
     std::shared_ptr<const ActsExamples::RandomNumbers> randomNumbers,
     std::shared_ptr<const Acts::TrackingGeometry> trackingGeometry) {
   ActsExamples::Options::setupMagneticFieldServices(vars, sequencer);
-      ActsExamples::Options::readMagneticField(vars));
-      auto magneticField = ActsExamples::Options::readBField(vars);
-      setupSimulationAlgorithms(vars, sequencer, randomNumbers,
-                                trackingGeometry, magneticField);
+  auto magneticField = ActsExamples::Options::readMagneticField(vars);
+  setupSimulationAlgorithms(vars, sequencer, randomNumbers, trackingGeometry,
+                            magneticField);
 }

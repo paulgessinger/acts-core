@@ -1,0 +1,40 @@
+---
+# ---
+# kind: pipeline
+# name: builds
+# steps:
+  # - name: build
+    # image: ghcr.io/acts-project/ubuntu2004
+    # commands:
+      # - >
+        # cmake -B build -S .
+        # -GNinja
+        # -DCMAKE_BUILD_TYPE=Release
+        # -DCMAKE_CXX_FLAGS=-Werror
+        # -DCMAKE_INSTALL_PREFIX="${INSTALL_DIR}"
+        # -DACTS_BUILD_EVERYTHING=on
+      # # - cmake --build build --
+        
+kind: pipeline
+name: analysis
+steps:
+  - name: analysis
+    image: ghcr.io/acts-project/ubuntu2004:v9
+    commands:
+      - pip3 install git+https://github.com/paulgessinger/cmakeperf.git@4cc3c8a
+      - >
+        cmake -B build -S .
+        -GNinja
+        -DCMAKE_BUILD_TYPE=RelWithDebInfo
+        -DCMAKE_CXX_FLAGS="-Werror"
+        -DACTS_BUILD_EVERYTHING=ON
+        -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+      - cmakeperf collect build/compile_commands.json -o perf.csv -j$(nproc)
+      - cmakeperf print perf.csv
+
+
+---
+kind: signature
+hmac: 180fb6a97d3e8e64f4bccb23c072605545f10eebd406ee01e838c64c3037b931
+
+...

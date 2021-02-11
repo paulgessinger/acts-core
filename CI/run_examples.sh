@@ -21,6 +21,10 @@ export G4ENSDFSTATEDATA=/tmp/G4ENSDFSTATE
 mkdir -p $G4ENSDFSTATEDATA
 curl -L https://geant4-data.web.cern.ch/datasets/G4ENSDFSTATE.2.3.tar.gz | tar -xz --strip-components 1 -C $G4ENSDFSTATEDATA
 
+export G4LEVELGAMMADATA=/tmp/G4LEVELGAMMA
+mkdir -p $G4LEVELGAMMADATA
+curl -L https://geant4-data.web.cern.ch/datasets/G4PhotonEvaporation.5.7.tar.gz | tar -xz --strip-components 1 -C $G4ENSDFSTATEDATA
+
 # Run hello world example
 run_example ActsExampleHelloWorld
 

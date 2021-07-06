@@ -259,3 +259,8 @@ add_subdirectory_if(docs ACTS_BUILD_DOCS)
 # create cmake configuration files and environment setup script
 include(ActsCreatePackageConfig)
 include(ActsCreateSetup)
+
+
+add_executable(abtest test.cpp)
+
+target_link_libraries(abtest PUBLIC ActsCore)

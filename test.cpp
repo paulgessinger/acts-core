@@ -80,9 +80,9 @@ int main() {
   unsigned int i = 0;
   for (auto& val : vals) {
     auto [phi, phiS, R0, maxR, minR] = val;
-    // Acts::Vector2 O0(R0 * (1 - std::cos(phiS)), R0 * std::sin(-phiS));
+    Acts::Vector2 O0(R0 * (1 - std::cos(phiS)), R0 * std::sin(-phiS));
 
-    std::cout << R0 << " <-> " << bR0 << std::endl;
+    // std::cout << R0 << " <-> " << bR0 << std::endl;
 
     auto bnd = AnnulusBounds{minR, maxR, -phi / 2.0, phi / 2.0, bO0, 0};
     p(i++, bnd, R0);

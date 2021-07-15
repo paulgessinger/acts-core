@@ -46,7 +46,7 @@ class GeantinoRecording final : public BareAlgorithm {
     /// The number of tracks per event.
     size_t tracksPerEvent = 0;
     /// Configuration of the generator action
-    PrimaryGeneratorAction::Config generationConfig;
+    Geant4::PrimaryGeneratorAction::Config generationConfig;
   };
 
   GeantinoRecording(Config config, Acts::Logging::Level level);

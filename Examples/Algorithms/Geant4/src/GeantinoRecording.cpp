@@ -23,6 +23,7 @@
 #include "SteppingAction.hpp"
 
 using namespace ActsExamples;
+using namespace ActsExamples::Geant4;
 
 GeantinoRecording::GeantinoRecording(GeantinoRecording::Config config,
                                      Acts::Logging::Level level)
